@@ -1,0 +1,29 @@
+ru:
+  hancock:
+    feedback: Обратная связь
+    breadcrumbs:
+      feedback: Обратная связь
+      contacts: Контакты
+    errors:
+      feedback:
+        recaptcha: Вы робот?
+
+  mongoid: &mongoid
+    models:
+      hancock/feedback/contact_message: Сообщение
+    attributes:
+      hancock/feedback/contact_message:
+        c_at: Время создания
+        name: Ваше имя
+        email: Ваш е-мейл
+        phone: Ваш телефон
+        content: Ваше сообщение
+
+    errors:
+      models:
+        hancock/feedback/contact_message:
+          attributes:
+            email:
+              invalid_email_address: "^Неверный e-mail"
+  activerecord:
+    <<: *mongoid

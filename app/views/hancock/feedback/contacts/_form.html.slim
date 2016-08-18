@@ -1,0 +1,16 @@
+/ = simple_form_for @contact_message, url: hancock_feedback_contacts_path do |f|
+= simple_form_for @contact_message, url: hancock_feedback_contacts_path, html: {data: {remote: true }} do |f|
+  = f.input :name
+  = f.input :email
+  = f.input :phone
+  = f.input :content, as: :text
+  - if Hancock::Feedback.config.captcha 
+    - if Hancock::Feedback.config.recaptcha_support
+      .input
+        - if @recaptcha_error
+          span.error.recaptcha_error= @recaptcha_error
+        = recaptcha_tags 
+    - elsif Hancock::Feedback.config.simple_captcha_support
+      = f.input :captcha, as: :simple_captcha, label: false
+      
+  = f.submit t('hancock.send')

@@ -1,0 +1,7 @@
+/ - if Hancock::Feedback.config.breadcrumbs_on_rails_support
+/   = render partial: "blocks/breadcrumbs"
+  
+= render 'shared/obj', obj: @seo_page
+
+#hancock_feedback_contact_form
+  = render partial: "hancock/feedback/contacts/form"
