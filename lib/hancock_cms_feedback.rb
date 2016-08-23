@@ -15,25 +15,7 @@ require 'validates_email_format_of'
 require 'x-real-ip'
 
 module Hancock::Feedback
-  # Hancock::register_plugin(self)
-
-  class << self
-    def orm
-      Hancock.orm
-    end
-    def mongoid?
-      Hancock::Feedback.orm == :mongoid
-    end
-    def active_record?
-      Hancock::Feedback.orm == :active_record
-    end
-    def model_namespace
-      "Hancock::Feedback::Models::#{Hancock::Feedback.orm.to_s.camelize}"
-    end
-    def orm_specific(name)
-      "#{model_namespace}::#{name}".constantize
-    end
-  end
+  include Hancock::Plugin
 
   autoload :Admin,  'hancock/feedback/admin'
   module Admin
