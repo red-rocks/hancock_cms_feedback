@@ -1,8 +1,9 @@
 # HancockCmsFeedback
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hancock_cms_feedback`. To experiment with that code, run `bin/console` for an interactive prompt.
+### Remaded from [EnjoyCMSFeedback](https://github.com/enjoycreative/enjoy_cms_feedback)
 
-TODO: Delete this and the text above, and describe your gem
+Feedback system for [HancockCMS](https://github.com/red-rocks/hancock_cms).
+Feedback form, AJAX, Mailer, custom fields, captcha support
 
 ## Installation
 
@@ -11,6 +12,16 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'hancock_cms_feedback'
 ```
+
+Then add this
+```ruby
+gem "recaptcha", require: "recaptcha/rails" # Recaptcha
+```
+or this
+```ruby
+gem "glebtv-simple_captcha" # simple_captcha
+```
+before it for captcha you need. And configure it.
 
 And then execute:
 
@@ -22,7 +33,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add in config/routes.rb
+
+```ruby
+  hancock_cms_feedback_routes
+```
+Then execute
+
+    $ rails g hancock:feedback:config
+
+and now you can edit config/initializers/hancock_feedback.rb
 
 ## Development
 

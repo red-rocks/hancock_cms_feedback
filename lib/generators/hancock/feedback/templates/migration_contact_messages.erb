@@ -5,9 +5,9 @@ class HancockFeedbackCreateContactMessages < ActiveRecord::Migration
       t.string :email
       t.string :phone
       t.text :content
-      <% Hancock::Feedback.config.fields.each_pair do |name, type| %>
+      <!-- <% Hancock::Feedback.config.fields.each_pair do |name, type| %>
       t.<%= type %> :<%= name %>
-      <% end %>
+      <% end %> -->
       t.timestamps
     end
 
