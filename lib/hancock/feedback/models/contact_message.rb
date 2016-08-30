@@ -25,6 +25,14 @@ module Hancock::Feedback
         after_create do
           mailer_class.send(mailer_method, self).deliver_now if send_emails?
         end
+        
+
+        def self.manager_can_add_actions
+          [:read]
+        end
+        def self.rails_admin_add_visible_actions
+          []
+        end
       end
 
       def send_emails?
@@ -41,10 +49,6 @@ module Hancock::Feedback
 
       def permitted_fields
         []
-      end
-
-      def self.manager_default_actions
-        [:read]
       end
     end
   end
