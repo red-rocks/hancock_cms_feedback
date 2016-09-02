@@ -44,7 +44,7 @@ module Hancock::Feedback
           meth = :save
         end
 
-        if @contact_message.send(meth)
+        if @contact_message.send(meth) and @recaptcha_error.blank?
           after_create
           if request.xhr? && process_ajax
             ajax_success
