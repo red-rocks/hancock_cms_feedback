@@ -19,6 +19,8 @@ module Hancock::Feedback
     attr_accessor :recaptcha_support
     attr_accessor :simple_captcha_support
 
+    attr_accessor :model_settings_support
+
     def initialize
       @recaptcha_support = defined?(Recaptcha)
       @simple_captcha_support = defined?(SimpleCaptcha)
@@ -32,6 +34,8 @@ module Hancock::Feedback
       @recreate_contact_message_action = "new"
 
       @breadcrumbs_on_rails_support = defined?(BreadcrumbsOnRails)
+
+      @model_settings_support = defined?(RailsAdminModelSettings)
     end
   end
 end

@@ -8,6 +8,25 @@ ru:
       feedback:
         recaptcha: Вы робот?
 
+    feedback_plugin:
+      fields:
+        name:
+          label: 'ФИО'
+          placeholder: 'ФИО'
+        email:
+          label: E-mail
+          placeholder: E-mail
+        phone:
+          label: Телефон
+          placeholder: Телефон
+        content:
+          label: Сообщение
+          placeholder: Сообщение
+        captcha:
+          label: "Введите код с картинки"
+          placeholder: "Введите код с картинки"
+
+
   mongoid: &mongoid
     models:
       hancock/feedback/contact_message: Сообщение
@@ -27,3 +46,10 @@ ru:
               invalid_email_address: "^Неверный e-mail"
   activerecord:
     <<: *mongoid
+
+
+
+  admin:
+    scopes:
+      rails_admin_settings~setting:
+        ns_rails_admin_settings_hancock_feedback_contact_message: 'Обратная связь'

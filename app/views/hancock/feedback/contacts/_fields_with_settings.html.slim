@@ -1,0 +1,15 @@
+- label = settings_scope.name_label(default: t('hancock.feedback_plugin.fields.name.label'), label: "Заголовок поля ФИО", cache_keys: cache_key)
+- placeholder = settings_scope.name_placeholder(default: t('hancock.feedback_plugin.fields.name.placeholder'), label: "Placeholder поля ФИО", cache_keys: cache_key)
+= f.input :name, label: label, input_html: {placeholder: placeholder, autofocus: true}
+
+- label = settings_scope.email_label(default: t('hancock.feedback_plugin.fields.email.label'), label: "Заголовок поля e-mail", cache_keys: cache_key)
+- placeholder = settings_scope.email_placeholder(default: t('hancock.feedback_plugin.fields.email.placeholder'), label: "Placeholder поля e-mail", cache_keys: cache_key)
+= f.input :email, label: label, input_html: {placeholder: placeholder}
+
+- label = settings_scope.phone_label(default: t('hancock.feedback_plugin.fields.phone.label'), label: "Заголовок поля телефон", cache_keys: cache_key)
+- placeholder = settings_scope.phone_placeholder(default: t('hancock.feedback_plugin.fields.phone.placeholder'), label: "Placeholder поля телефон", cache_keys: cache_key)
+= f.input :phone, label: label, input_html: {placeholder: placeholder}
+
+- label = settings_scope.content_label(default: t('hancock.feedback_plugin.fields.content.label'), label: "Заголовок поля сообщение", cache_keys: cache_key)
+- placeholder = settings_scope.content_placeholder(default: t('hancock.feedback_plugin.fields.content.placeholder'), label: "Placeholder поля сообщение", cache_keys: cache_key)
+= f.input :content, as: :text, label: label, input_html: {placeholder: placeholder}

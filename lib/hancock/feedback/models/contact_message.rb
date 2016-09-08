@@ -7,6 +7,10 @@ module Hancock::Feedback
       include Hancock::Feedback.orm_specific('ContactMessage')
 
       included do
+        if Hancock::Feedback.config.model_settings_support
+          include RailsAdminModelSettings::ModelSettingable
+        end
+
         if Hancock::Feedback.config.simple_captcha_support
           include SimpleCaptcha::ModelHelpers
           apply_simple_captcha message: Hancock::Feedback.configuration.captcha_error_message
@@ -54,7 +58,7 @@ module Hancock::Feedback
       def permitted_fields
         self.class.permitted_fields
       end
-      
+
     end
   end
 end

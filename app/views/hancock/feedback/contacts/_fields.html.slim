@@ -1,0 +1,15 @@
+- label = t('hancock.feedback_plugin.fields.name.label')
+- placeholder = t('hancock.feedback_plugin.fields.name.placeholder')
+= f.input :name, label: label, input_html: {placeholder: placeholder, autofocus: true}
+
+- label = t('hancock.feedback_plugin.fields.email.label')
+- placeholder = t('hancock.feedback_plugin.fields.email.placeholder')
+= f.input :email, label: label, input_html: {placeholder: placeholder}
+
+- label = t('hancock.feedback_plugin.fields.phone.label')
+- placeholder = t('hancock.feedback_plugin.fields.phone.placeholder')
+= f.input :phone, label: label, input_html: {placeholder: placeholder}
+
+- label = t('hancock.feedback_plugin.fields.content.label')
+- placeholder = t('hancock.feedback_plugin.fields.content.placeholder')
+= f.input :content, as: :text, label: label, input_html: {placeholder: placeholder}

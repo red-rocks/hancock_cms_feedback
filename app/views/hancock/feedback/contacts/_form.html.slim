@@ -1,16 +1,30 @@
 / = simple_form_for @contact_message, url: hancock_feedback_contacts_path do |f|
 = simple_form_for @contact_message, url: hancock_feedback_contacts_path, html: {data: {remote: true }} do |f|
-  = f.input :name
-  = f.input :email
-  = f.input :phone
-  = f.input :content, as: :text
-  - if Hancock::Feedback.config.captcha 
+  - if cache_fields?
+    - cache cache_key do
+      = render partial: fields_partial, locals: {f: f}
+  - else
+    = render partial: fields_partial, locals: {f: f}
+  
+  - if Hancock::Feedback.config.captcha
     - if Hancock::Feedback.config.recaptcha_support
       .input
         - if @recaptcha_error
           span.error.recaptcha_error= @recaptcha_error
-        = recaptcha_tags 
+        = recaptcha_tags
     - elsif Hancock::Feedback.config.simple_captcha_support
-      = f.input :captcha, as: :simple_captcha, label: false
-      
-  = f.submit t('hancock.send')
+      - label = t('hancock.feedback_plugin.fields.captcha.label')
+      - placeholder = t('hancock.feedback_plugin.fields.captcha.placeholder')
+      - update_captcha = link_to ' (обн)', hancock_feedback_update_captcha_path, class: 'update_captcha_link'
+      - if Hancock::Feedback.config.model_settings_support
+        - label = settings_scope.simple_captcha_label(default: label, label: "Заголовок поля Код проверки")
+        - placeholder = settings_scope.simple_captcha_placeholder(default: placeholder, label: "Placeholder поля Код проверки")
+        = f.input :captcha, as: :simple_captcha, label: label, input_html: {placeholder: placeholder, update_captcha: update_captcha}, required: true
+      - else
+        = f.input :captcha, as: :simple_captcha, label: label, input_html: {placeholder: placeholder, update_captcha: update_captcha}, required: true
+        
+  - if Hancock::Feedback.config.model_settings_support
+    - label = settings_scope.submit_label(default: t('hancock.send'), label: "Текст на кнопке отправки")
+  - else
+    - label = t('hancock.send')
+  = f.submit label

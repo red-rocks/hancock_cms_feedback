@@ -7,6 +7,8 @@ module Hancock::Feedback
         if Hancock::Feedback.config.breadcrumbs_on_rails_support
           add_breadcrumb I18n.t('hancock.breadcrumbs.contacts'), :hancock_feedback_contacts_path
         end
+
+        helper_method :cache_fields?, :cache_key, :fields_partial, :settings_scope, :hancock_feedback_update_captcha_path
       end
 
       def index
@@ -59,6 +61,34 @@ module Hancock::Feedback
       def sent
       end
 
+      def update_captcha
+        render layout: false
+      end
+
+
+      def hancock_feedback_update_captcha_path
+        url_for(action: :update_captcha, time: Time.new.to_i, only_path: true)
+      end
+      def cache_fields?
+        action_name == 'new'
+      end
+      def cache_key
+        'hancock_feedback_contacts_fields'.freeze
+      end
+      def fields_partial
+        "hancock/feedback/contacts/#{(Hancock::Feedback.config.model_settings_support ? 'fields' : 'fields_with_settings')}".freeze
+      end
+      def settings_scope
+        if Hancock::Feedback.config.model_settings_support
+          model.settings
+        elsif defined?(Settings)
+          Settings.ns('feedback')
+        else
+          nil
+        end
+      end
+
+
       private
       def render_contacts_error
         if request.xhr? && process_ajax
@@ -103,6 +133,7 @@ module Hancock::Feedback
           Hancock::Feedback::ContactMessage.permitted_fields + [:name, :email, :phone, :content, :captcha, :captcha_key]
         )
       end
+
     end
   end
 end
