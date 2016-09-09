@@ -32,10 +32,14 @@ module Hancock::Feedback
 
 
         def self.manager_can_add_actions
-          [:read]
+          ret = [:read]
+          ret << :model_settings if Hancock::Feedback.config.model_settings_support
+          ret.frozen
         end
         def self.rails_admin_add_visible_actions
-          []
+          ret = []
+          ret << :model_settings if Hancock::Feedback.config.model_settings_support
+          ret.frozen
         end
 
         def self.permitted_fields

@@ -70,7 +70,7 @@ module Hancock::Feedback
         url_for(action: :update_captcha, time: Time.new.to_i, only_path: true)
       end
       def cache_fields?
-        action_name == 'new'
+        ['new', 'index'].include? action_name
       end
       def cache_key
         'hancock_feedback_contacts_fields'.freeze
