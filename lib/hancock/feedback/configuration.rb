@@ -20,6 +20,8 @@ module Hancock::Feedback
     attr_accessor :simple_captcha_support
 
     attr_accessor :model_settings_support
+    attr_accessor :user_abilities_support
+    attr_accessor :ra_comments_support
 
     def initialize
       @recaptcha_support = defined?(Recaptcha)
@@ -36,6 +38,8 @@ module Hancock::Feedback
       @breadcrumbs_on_rails_support = defined?(BreadcrumbsOnRails)
 
       @model_settings_support = defined?(RailsAdminModelSettings)
+      @user_abilities_support = defined?(RailsAdminUserAbilities)
+      @ra_comments_support = defined?(RailsAdminComments)
     end
   end
 end

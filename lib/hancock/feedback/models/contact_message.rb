@@ -31,15 +31,26 @@ module Hancock::Feedback
         end
 
 
+        def self.manager_can_default_actions
+          [:show, :read].freeze
+        end
+        def self.manager_cannot_actions
+          [:new, :create, :edit, :update].freeze
+        end
+
         def self.manager_can_add_actions
-          ret = [:read]
+          ret = []
           ret << :model_settings if Hancock::Feedback.config.model_settings_support
-          ret.frozen
+          ret << :model_accesses if Hancock::Feedback.config.user_abilities_support
+          ret += [:comments, :model_comments] if Hancock::Feedback.config.ra_comments_support
+          ret.freeze
         end
         def self.rails_admin_add_visible_actions
           ret = []
           ret << :model_settings if Hancock::Feedback.config.model_settings_support
-          ret.frozen
+          ret << :model_accesses if Hancock::Feedback.config.user_abilities_support
+          ret += [:comments, :model_comments] if Hancock::Feedback.config.ra_comments_support
+          ret.freeze
         end
 
         def self.permitted_fields

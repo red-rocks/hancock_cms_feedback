@@ -31,5 +31,6 @@ module Hancock::Feedback
       rescue
       end
     end
+
   end
 end
