@@ -2,7 +2,7 @@
 = simple_form_for @contact_message, url: hancock_feedback_contacts_path, html: {data: {remote: true }} do |f|
   - if cache_fields?
     - cache cache_key, skip_digest: true do
-      = render partial: fields_partial, locals: {f: f, cache_key: cache_key}
+      = render partial: fields_partial, locals: {f: f, cache_key: "views/#{cache_key}"}
   - else
     = render partial: fields_partial, locals: {f: f}
   
