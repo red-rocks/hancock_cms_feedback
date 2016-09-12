@@ -52,4 +52,4 @@ ru:
   admin:
     scopes:
       rails_admin_settings~setting:
-        ns_rails_admin_settings_hancock_feedback_contact_message: 'Обратная связь'
+        ns_rails_admin_model_settings_hancock_feedback_contact_message: 'Обратная связь'
