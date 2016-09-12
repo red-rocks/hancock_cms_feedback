@@ -76,7 +76,7 @@ module Hancock::Feedback
         'hancock_feedback_contacts_fields'.freeze
       end
       def fields_partial
-        "hancock/feedback/contacts/#{(Hancock::Feedback.config.model_settings_support ? 'fields' : 'fields_with_settings')}".freeze
+        "hancock/feedback/contacts/#{(Hancock::Feedback.config.model_settings_support ? 'fields_with_settings' : 'fields')}".freeze
       end
       def settings_scope
         if Hancock::Feedback.config.model_settings_support
