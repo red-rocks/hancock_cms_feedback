@@ -8,7 +8,7 @@ module Hancock::Feedback
           add_breadcrumb I18n.t('hancock.breadcrumbs.contacts'), :hancock_feedback_contacts_path
         end
 
-        helper_method :cache_fields?, :cache_key, :fields_partial, :settings_scope, :hancock_feedback_update_captcha_path
+        helper_method :is_cache_fields, :cache_key, :fields_partial, :settings_scope, :hancock_feedback_update_captcha_path
       end
 
       def index
@@ -68,6 +68,9 @@ module Hancock::Feedback
 
       def hancock_feedback_update_captcha_path
         url_for(action: :update_captcha, time: Time.new.to_i, only_path: true)
+      end
+      def is_cache_fields
+        cache_fields?
       end
       def cache_fields?
         ['new', 'index'].include? action_name

@@ -37,8 +37,6 @@ window.hancock_cms.feedback.set_update_captcha = (link_selector = "#new_hancock_
       e.preventDefault()
       $.get e.currentTarget.href, (data)->
           $(captcha_selector).replaceWith(data).find('input[type=text]').focus()
-  return false
-  
 
   $(document).delegate captcha_selector + " img", 'dblclick', (e)->
     e.preventDefault()
