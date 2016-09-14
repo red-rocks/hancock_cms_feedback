@@ -25,6 +25,7 @@ ru:
         captcha:
           label: "Введите код с картинки"
           placeholder: "Введите код с картинки"
+          update: ""
 
 
   mongoid: &mongoid
