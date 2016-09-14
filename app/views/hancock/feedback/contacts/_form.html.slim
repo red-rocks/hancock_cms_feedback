@@ -11,7 +11,7 @@
       .input
         - if @recaptcha_error
           span.error.recaptcha_error= @recaptcha_error
-        = recaptcha_tags
+        = recaptcha_tags(recaptcha_options)
     - elsif Hancock::Feedback.config.simple_captcha_support
       = render partial: "hancock/feedback/contacts/simple_captcha", locals: {f: f}
         
@@ -19,4 +19,5 @@
     - label = settings_scope.submit_label(default: t('hancock.send'), label: "Текст на кнопке отправки")
   - else
     - label = t('hancock.send')
-  = f.submit label
+  .submit_button_wrapper
+    = f.submit label, class: 'submit_button'
