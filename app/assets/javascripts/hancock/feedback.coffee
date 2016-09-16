@@ -5,3 +5,4 @@
 
 window.hancock_cms.feedback.create_ajax_form()
 window.hancock_cms.feedback.set_update_captcha()
+window.hancock_cms.feedback.set_feedback_form_reloader()
