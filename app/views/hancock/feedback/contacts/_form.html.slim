@@ -2,9 +2,9 @@
 = simple_form_for @contact_message, url: hancock_feedback_contacts_path, html: {data: {remote: true }} do |f|
   - if is_cache_fields
     - cache cache_key, skip_digest: true do
-      = render partial: fields_partial, locals: {f: f, cache_key: "views/#{cache_key}"}
+      = render partial: fields_partial, locals: {f: f, cache_key: "views/#{cache_key}", settings_scope: settings_scope}
   - else
-    = render partial: fields_partial, locals: {f: f}
+    = render partial: fields_partial, locals: {f: f, settings_scope: settings_scope}
   
   - if Hancock::Feedback.config.captcha
     - if Hancock::Feedback.config.recaptcha_support
@@ -13,7 +13,7 @@
           span.error.recaptcha_error= @recaptcha_error
         = recaptcha_tags(recaptcha_options)
     - elsif Hancock::Feedback.config.simple_captcha_support
-      = render partial: "hancock/feedback/contacts/simple_captcha", locals: {f: f}
+      = render partial: "hancock/feedback/contacts/simple_captcha", locals: {f: f, settings_scope: settings_scope}
         
   - if Hancock::Feedback.config.model_settings_support
     - label = settings_scope.submit_label(default: t('hancock.send'), label: "Текст на кнопке отправки")
