@@ -10,13 +10,13 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
       data = xhr.responseText
       if $(data).find('img').length > 0
         $(data).find('img').load ->
-          $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).replaceWith(data).css(opacity: "")
+          $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).html(data).css(opacity: "")
       else
-        $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).replaceWith(data).css(opacity: "")
+        $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).html(data).css(opacity: "")
 
   else
     $(document).delegate form_selector, "ajax:complete", (event, xhr, status)->
-      $(form_selector).closest(wrapper_selector).replaceWith(xhr.responseText)
+      $(form_selector).closest(wrapper_selector).htmk(xhr.responseText)
 
 
   $(document).delegate form_selector + " .input", 'click', (e) ->
