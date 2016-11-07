@@ -8,8 +8,8 @@ module Hancock::Feedback
       #end
 
       mail(
-          from: Settings.default_email_from(default: 'noreply@hancockcreate.ru'),
-          to: Settings.form_email(default: 'admin@hancockcreate.ru'),
+          from: Settings.default_email_from(default: 'noreply@redrocks.pro'),
+          to: Settings.form_email(default: 'admin@redrocks.pro'),
           subject: "[#{Settings.email_topic(default: 'с сайта')}] #{message.name} #{message.email}"
       )
     end

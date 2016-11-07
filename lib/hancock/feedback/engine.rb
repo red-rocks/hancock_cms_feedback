@@ -12,8 +12,8 @@ module Hancock::Feedback
       #temp
       begin
         if Settings and Settings.table_exists?
-          Settings.default_email_from(default: 'noreply@site.domain')
-          Settings.form_email(default: 'admin@site.domain')
+          Settings.default_email_from(default: 'noreply@redrocks.pro')
+          Settings.form_email(default: 'admin@redrocks.pro')
           Settings.email_topic(default: 'с сайта')
         end
       rescue
