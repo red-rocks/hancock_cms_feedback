@@ -8,19 +8,19 @@ module Hancock::Feedback
           add_breadcrumb I18n.t('hancock.breadcrumbs.contacts'), :hancock_feedback_contacts_path
         end
 
-        helper_method :is_cache_fields, :cache_key, :fields_partial, :settings_scope, :hancock_feedback_update_captcha_path, :recaptcha_options
+        helper_method :hancock_feedback_update_captcha_path
       end
 
       def index
         @contact_message = model.new
         after_initialize
-        xhr_checker
+        render locals: locals unless xhr_checker
       end
 
       def new
         @contact_message = model.new
         after_initialize
-        xhr_checker
+        render locals: locals unless xhr_checker
       end
 
       def create
@@ -93,7 +93,15 @@ module Hancock::Feedback
       def recaptcha_options
         {}
       end
-
+      def locals
+        {
+          is_cache_fields:    is_cache_fields,
+          cache_key:          cache_key,
+          fields_partial:     fields_partial,
+          settings_scope:     settings_scope,
+          recaptcha_options:  recaptcha_options
+        }
+      end
 
       private
       def render_contacts_error
@@ -117,7 +125,8 @@ module Hancock::Feedback
       end
       def xhr_checker
         if request.xhr?
-          render layout: false
+          render layout: false, locals: locals
+          return true
         end
       end
       def after_initialize
