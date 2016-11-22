@@ -1,3 +1,11 @@
+ruby:
+  cache_key ||= 'views/hancock_feedback_contacts_fields'.freeze
+  if Hancock::Feedback.config.model_settings_support
+    settings_scope ||= Hancock::Feedback::ContactMessage.settings
+  elsif defined?(Settings)
+    settings_scope ||= Settings.ns('feedback')
+  end
+
 - label = settings_scope.name_label(default: t('hancock.feedback_plugin.fields.name.label'), label: "Заголовок поля ФИО", cache_keys: cache_key)
 - placeholder = settings_scope.name_placeholder(default: t('hancock.feedback_plugin.fields.name.placeholder'), label: "Placeholder поля ФИО", cache_keys: cache_key)
 = f.input :name, label: label, input_html: {placeholder: placeholder, autofocus: true}

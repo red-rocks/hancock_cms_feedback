@@ -1,3 +1,10 @@
+ruby:
+  if Hancock::Feedback.config.model_settings_support
+    settings_scope ||= Hancock::Feedback::ContactMessage.settings
+  elsif defined?(Settings)
+    settings_scope ||= Settings.ns('feedback')
+  end
+  
 - label = t('hancock.feedback_plugin.fields.captcha.label')
 - placeholder = t('hancock.feedback_plugin.fields.captcha.placeholder')
 - update_captcha_text = t('hancock.feedback_plugin.fields.captcha.update')
