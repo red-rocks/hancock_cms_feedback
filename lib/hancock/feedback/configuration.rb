@@ -24,8 +24,8 @@ module Hancock::Feedback
     attr_accessor :ra_comments_support
 
     def initialize
-      @recaptcha_support = defined?(Recaptcha)
-      @simple_captcha_support = defined?(SimpleCaptcha)
+      @recaptcha_support = !!defined?(Recaptcha)
+      @simple_captcha_support = !!defined?(SimpleCaptcha)
 
       @captcha = @recaptcha_support || @simple_captcha_support
       @message_required = true
@@ -35,11 +35,11 @@ module Hancock::Feedback
 
       @recreate_contact_message_action = "new"
 
-      @breadcrumbs_on_rails_support = defined?(BreadcrumbsOnRails)
+      @breadcrumbs_on_rails_support = !!defined?(BreadcrumbsOnRails)
 
-      @model_settings_support = defined?(RailsAdminModelSettings)
-      @user_abilities_support = defined?(RailsAdminUserAbilities)
-      @ra_comments_support = defined?(RailsAdminComments)
+      @model_settings_support = !!defined?(RailsAdminModelSettings)
+      @user_abilities_support = !!defined?(RailsAdminUserAbilities)
+      @ra_comments_support = !!defined?(RailsAdminComments)
     end
   end
 end
