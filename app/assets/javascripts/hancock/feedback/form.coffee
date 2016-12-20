@@ -16,7 +16,7 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
 
   else
     $(document).delegate form_selector, "ajax:complete", (event, xhr, status)->
-      $(form_selector).closest(wrapper_selector).htmk(xhr.responseText)
+      $(form_selector).closest(wrapper_selector).html(xhr.responseText)
 
 
   $(document).delegate form_selector + " .input", 'click', (e) ->
@@ -53,12 +53,13 @@ window.hancock_cms.feedback.set_feedback_form_reloader = (link_selector = "#hanc
                                                           wrapper_selector = '#hancock_cms_feedback_success',
                                                           wrapper_form = $("<div id='hancock_cms_feedback_success'></div>"),
                                                           animate = true) ->
+
   if animate
     $(document).delegate link_selector, 'click', (e) ->
       e.preventDefault()
       $(wrapper_selector).animate(opacity: 0.01, 100)
       $.get e.currentTarget.href, (data)->
-        data = wrapper_form.html(data)[0].outerHTML
+        data = wrapper_form.html(data)[0].outerHTML if wrapper_form.length > 0
         if $(data).find('img').length > 0
           $(data).find('img').load ->
             $(wrapper_selector).stop().css(opacity: 0.01).replaceWith(data).find('input[type=text]').focus()
@@ -68,7 +69,7 @@ window.hancock_cms.feedback.set_feedback_form_reloader = (link_selector = "#hanc
     $(document).delegate link_selector, 'click', (e) ->
       e.preventDefault()
       $.get e.currentTarget.href, (data)->
-        data = wrapper_form.html(data)[0].outerHTML
+        data = wrapper_form.html(data)[0].outerHTML if wrapper_form.length > 0
         if $(data).find('img').length > 0
           $(data).find('img').load ->
             $(wrapper_selector).replaceWith(data).find('input[type=text]').focus()
