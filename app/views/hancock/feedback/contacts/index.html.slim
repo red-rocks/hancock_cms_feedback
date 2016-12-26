@@ -1,7 +1,8 @@
 / - if Hancock::Feedback.config.breadcrumbs_on_rails_support
 /   = render partial: "blocks/breadcrumbs"
-  
-= render 'shared/obj', obj: @seo_page
+
+- _partial_path = (Hancock::Feedback.config.seo_support ? 'shared/obj_with_seo' : 'shared/obj')
+= render _partial_path, obj: (@seo_page || @seo_parent_page)
 
 #hancock_feedback_contact_form
   = render partial: "hancock/feedback/contacts/form"

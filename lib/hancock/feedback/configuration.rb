@@ -9,6 +9,9 @@ module Hancock::Feedback
     attr_accessor :captcha
     attr_accessor :message_required
 
+    attr_accessor :seo_support
+    attr_accessor :cache_support
+
     attr_accessor :captcha_error_message
     attr_accessor :no_contact_info_error_message
 
@@ -29,6 +32,9 @@ module Hancock::Feedback
 
       @captcha = @recaptcha_support || @simple_captcha_support
       @message_required = true
+
+      @seo_support    = !!defined? Hancock::Seo
+      @cache_support  = !!defined?(Hancock::Cache)
 
       @captcha_error_message = "Код проверки введен неверно"
       @no_contact_info_error_message = "Пожалуйста введите Ваш e-mail или телефон, чтобы мы могли связаться с вами."
