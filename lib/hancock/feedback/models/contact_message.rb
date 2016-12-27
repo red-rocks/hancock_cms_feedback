@@ -30,18 +30,24 @@ module Hancock::Feedback
           mailer_class.send(mailer_method, self).deliver_now if send_emails?
         end
 
-
-        def self.manager_can_default_actions
-          [:show, :read].freeze
+        # def self.admin_can_default_actions
+        #   [:show, :read, :edit, :update].freeze
+        # end
+        # def self.manager_can_default_actions
+        #   [:show, :read].freeze
+        # end
+        def self.admin_cannot_actions
+          [:new, :create].freeze
         end
         def self.manager_cannot_actions
           [:new, :create, :edit, :update].freeze
         end
 
+
         def self.manager_can_add_actions
           ret = []
           ret << :model_settings if Hancock::Feedback.config.model_settings_support
-          ret << :model_accesses if Hancock::Feedback.config.user_abilities_support
+          # ret << :model_accesses if Hancock::Feedback.config.user_abilities_support
           ret += [:comments, :model_comments] if Hancock::Feedback.config.ra_comments_support
           ret.freeze
         end
