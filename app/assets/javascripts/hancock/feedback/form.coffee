@@ -4,7 +4,7 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
 
   if animate
     $(document).delegate form_selector, "ajax:send", ()->
-      $(form_selector).animate(opacity: 0.01, 100)
+      $(form_selector).closest(wrapper_selector).animate(opacity: 0.01, 100)
 
     $(document).delegate form_selector, "ajax:complete", (event, xhr, status)->
       data = xhr.responseText

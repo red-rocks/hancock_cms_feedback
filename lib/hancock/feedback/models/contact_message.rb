@@ -30,6 +30,13 @@ module Hancock::Feedback
           mailer_class.send(mailer_method, self).deliver_now if send_emails?
         end
 
+        def self.rails_admin_name_synonyms
+          "Фидбек Фидбэк Обратная связь Контакты Сообщение Сообщения".freeze
+        end
+        def self.rails_admin_navigation_icon
+          'icon-envelope-open-o'.freeze
+        end
+
         # def self.admin_can_default_actions
         #   [:show, :read, :edit, :update].freeze
         # end
