@@ -34,7 +34,7 @@ module Hancock::Feedback
           "Фидбек Фидбэк Обратная связь Контакты Сообщение Сообщения".freeze
         end
         def self.rails_admin_navigation_icon
-          'icon-envelope-open-o'.freeze
+          'fa fa-envelope-open-o'.freeze
         end
 
         # def self.admin_can_default_actions
