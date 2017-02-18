@@ -106,18 +106,18 @@ module Hancock::Feedback
       private
       def render_contacts_error
         if request.xhr? && process_ajax
-          render partial: form_partial, status: 422
+          render partial: form_partial, status: 422, locals: locals
           # render json: {errors: @contact_message.errors}, status: 422
         else
           flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
-          render action: Hancock::Feedback.configuration.recreate_contact_message_action, status: 422
+          render action: Hancock::Feedback.configuration.recreate_contact_message_action, status: 422, locals: locals
         end
       end
       def process_ajax
         true
       end
       def ajax_success
-        render partial: success_partial
+        render partial: success_partial, locals: locals
         # render json: {ok: true}
       end
       def redirect_after_done
