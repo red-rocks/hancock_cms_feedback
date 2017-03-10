@@ -10,7 +10,7 @@ module Hancock::Feedback
           field :content, type: String
 
           if Hancock.rails5?
-            if relations.has_key?("updater")
+            if relations.has_key?("updater") and defined?(::Mongoid::History)
               belongs_to :updater, class_name: ::Mongoid::History.modifier_class_name, optional: true, validate: false
               _validators.delete(:updater)
               _validate_callbacks.each do |callback|
@@ -18,9 +18,9 @@ module Hancock::Feedback
                   _validate_callbacks.delete(callback)
                 end
               end
-
             end
           end
+
         end
 
         class_methods do
