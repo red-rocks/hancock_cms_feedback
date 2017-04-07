@@ -13,10 +13,12 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
           $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).html(data).css(opacity: "")
       else
         $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).html(data).css(opacity: "")
-
+      window.hancock_cms.feedback.recaptcha_render()
+      
   else
     $(document).delegate form_selector, "ajax:complete", (event, xhr, status)->
       $(form_selector).closest(wrapper_selector).html(xhr.responseText)
+      window.hancock_cms.feedback.recaptcha_render()
 
 
   $(document).delegate form_selector + " .input", 'click', (e) ->
@@ -75,3 +77,11 @@ window.hancock_cms.feedback.set_feedback_form_reloader = (link_selector = "#hanc
             $(wrapper_selector).replaceWith(data).find('input[type=text]').focus()
         else
           $(wrapper_selector).replaceWith(data).find('input[type=text]').focus()
+
+
+
+window.hancock_cms.feedback.recaptcha_autoclick = ->
+  $(".recaptcha-checkbox-checkmark").click()
+
+window.hancock_cms.feedback.recaptcha_render = ->
+  grecaptcha.render($(".g-recaptcha")[0], {sitekey: $(".g-recaptcha").data('sitekey')})

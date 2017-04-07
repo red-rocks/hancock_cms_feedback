@@ -91,7 +91,13 @@ module Hancock::Feedback
         end
       end
       def recaptcha_options
-        {}
+        ret = {}
+        if action_name == 'create'
+          ret[:script] = false
+          # ret[:hl] = '&onload=window.hancock_cms.feedback.recaptcha_autoclick' if @recaptcha_error.blank?
+          # {onload: 'window.hancock_cms.feedback.recaptcha_autoclick'}
+        end
+        ret
       end
       def locals
         {
