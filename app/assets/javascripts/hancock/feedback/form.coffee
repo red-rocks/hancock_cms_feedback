@@ -10,21 +10,39 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
       data = xhr.responseText
       if $(data).find('img').length > 0
         $(data).find('img').load ->
-          $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).html(data).css(opacity: "")
+          wrapper = $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01)
+          if $(data).find(".recaptcha_error").length > 0 or $(data).find(".fields_block").length == 0
+            wrapper.html(data).css(opacity: "")
+            window.hancock_cms.feedback.recaptcha_render()
+          else
+            wrapper.find(".fields_block").replaceWith($(data).find(".fields_block"))
+            wrapper.css(opacity: "")
       else
-        $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).html(data).css(opacity: "")
-      window.hancock_cms.feedback.recaptcha_render()
+        wrapper = $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01)
+        if $(data).find(".recaptcha_error").length > 0 or $(data).find(".fields_block").length == 0
+          wrapper.html(data).css(opacity: "")
+          window.hancock_cms.feedback.recaptcha_render()
+        else
+          wrapper.find(".fields_block").replaceWith($(data).find(".fields_block"))
+          wrapper.css(opacity: "")
+
 
   else
     $(document).delegate form_selector, "ajax:complete", (event, xhr, status)->
-      $(form_selector).closest(wrapper_selector).html(xhr.responseText)
-      window.hancock_cms.feedback.recaptcha_render()
+      data = xhr.responseText
+      wrapper = $(form_selector).closest(wrapper_selector)
+      if $(data).find(".recaptcha_error").length > 0 or $(data).find(".fields_block").length == 0
+        wrapper.html(data)
+        window.hancock_cms.feedback.recaptcha_render()
+      else
+        wrapper.find(".fields_block").replaceWith($(data).find(".fields_block"))
 
 
   $(document).delegate form_selector + " .input", 'click', (e) ->
     e.preventDefault()
-    $(e.currentTarget).removeClass("field_with_errors").find('span.error').hide()
+    $(e.currentTarget).removeClass("field_with_errors").find('.error').hide()
     return false
+
 
 
 window.hancock_cms.feedback.set_update_captcha = (link_selector = "#new_hancock_feedback_contact_message .update_captcha_link",
