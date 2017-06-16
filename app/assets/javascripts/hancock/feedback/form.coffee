@@ -14,7 +14,7 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
       else
         $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01).html(data).css(opacity: "")
       window.hancock_cms.feedback.recaptcha_render()
-      
+
   else
     $(document).delegate form_selector, "ajax:complete", (event, xhr, status)->
       $(form_selector).closest(wrapper_selector).html(xhr.responseText)
@@ -84,4 +84,7 @@ window.hancock_cms.feedback.recaptcha_autoclick = ->
   $(".recaptcha-checkbox-checkmark").click()
 
 window.hancock_cms.feedback.recaptcha_render = ->
-  grecaptcha.render($(".g-recaptcha")[0], {sitekey: $(".g-recaptcha").data('sitekey')})
+  window.grecaptcha.render($(".g-recaptcha")[0], {sitekey: $(".g-recaptcha").data('sitekey')})
+
+window.hancock_cms.feedback.recaptcha_reset = ->
+  window.grecaptcha.reset()

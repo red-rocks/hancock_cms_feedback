@@ -43,10 +43,10 @@ module Hancock::Feedback
         # def self.manager_can_default_actions
         #   [:show, :read].freeze
         # end
-        def self.admin_cannot_actions
+        def self.admin_cannot_add_actions
           [:new, :create].freeze
         end
-        def self.manager_cannot_actions
+        def self.manager_cannot_add_actions
           [:new, :create, :edit, :update].freeze
         end
 
