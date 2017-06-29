@@ -39,9 +39,10 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
 
 
   $(document).delegate form_selector + " .input", 'click', (e) ->
-    e.preventDefault()
     $(e.currentTarget).removeClass("field_with_errors").find('.error').hide()
-    return false
+    # e.preventDefault()
+    # $(e.currentTarget).removeClass("field_with_errors").find('.error').hide()
+    # return false
 
 
 
