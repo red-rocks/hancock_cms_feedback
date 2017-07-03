@@ -151,7 +151,7 @@ module Hancock::Feedback
       end
       def message_params
         params.require(model.to_param.gsub("::", "").underscore).permit(
-          model.permitted_fields + [:name, :email, :phone, :content, :captcha, :captcha_key]
+          model.permitted_fields + [:name, :email, :phone, :content, :personal_data_processing, :captcha, :captcha_key]
         )
       end
 

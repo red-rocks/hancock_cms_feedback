@@ -38,6 +38,7 @@ ru:
         email: Ваш е-мейл
         phone: Ваш телефон
         content: Ваше сообщение
+        personal_data_processing: Я даю разрешение на обработку моих персональных данных
 
     errors:
       models:
@@ -45,6 +46,7 @@ ru:
           attributes:
             email:
               invalid_email_address: "^Неверный e-mail"
+              user_permission: Необходимо подтвердить
   activerecord:
     <<: *mongoid
 

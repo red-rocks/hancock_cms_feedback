@@ -16,3 +16,8 @@ ruby:
 - label = t('hancock.feedback_plugin.fields.content.label')
 - placeholder = t('hancock.feedback_plugin.fields.content.placeholder')
 = f.input :content, as: :text, label: label, input_html: {placeholder: placeholder, autofocus: autofocus_field == :content}
+
+- label = t('hancock.feedback_plugin.fields.personal_data_processing.label')
+- placeholder = false # t('hancock.feedback_plugin.fields.personal_data_processing.placeholder')
+- checked = (f.object.personal_data_processing.nil? ? true : f.object.personal_data_processing)
+= f.input :personal_data_processing, as: :boolean, label: label, boolean_style: :inline, input_html: {checked: checked} 

@@ -21,6 +21,17 @@ module Hancock::Feedback
             end
           end
 
+          attr_accessor :personal_data_processing
+
+          def personal_data_processing=(string_value)
+            @personal_data_processing = (string_value == '1')
+          end
+          validate do
+            unless self.personal_data_processing
+              self.errors.add(:personal_data_processing, t('errors.models.hancock/feedback/contact_message.attributes.email.personal_data_processing'))
+            end
+          end
+
         end
 
         class_methods do
