@@ -28,7 +28,7 @@ module Hancock::Feedback
           end
           validate do
             unless self.personal_data_processing
-              self.errors.add(:personal_data_processing, t('errors.models.hancock/feedback/contact_message.attributes.email.personal_data_processing'))
+              self.errors.add(:personal_data_processing, I18n.t('mongoid.errors.models.hancock/feedback/contact_message.attributes.personal_data_processing.checked_required'))
             end
           end
 

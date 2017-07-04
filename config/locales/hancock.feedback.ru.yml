@@ -26,6 +26,10 @@ ru:
           label: "Введите код с картинки"
           placeholder: "Введите код с картинки"
           update: ""
+        personal_data_processing:
+          label: "Я даю разрешение на обработку моих персональных данных"
+          placeholder: ""
+          update: ""
 
 
   mongoid: &mongoid
@@ -38,7 +42,7 @@ ru:
         email: Ваш е-мейл
         phone: Ваш телефон
         content: Ваше сообщение
-        personal_data_processing: Я даю разрешение на обработку моих персональных данных
+        personal_data_processing: Разрешение на обработку моих персональных данных
 
     errors:
       models:
@@ -46,7 +50,8 @@ ru:
           attributes:
             email:
               invalid_email_address: "^Неверный e-mail"
-              user_permission: Необходимо подтвердить
+            personal_data_processing:
+              checked_required: "Необходимо подтвердить"
   activerecord:
     <<: *mongoid
 
