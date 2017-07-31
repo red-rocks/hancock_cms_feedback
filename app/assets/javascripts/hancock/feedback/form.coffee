@@ -13,7 +13,7 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
           wrapper = $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01)
           if $(data).find(".recaptcha_error").length > 0 or $(data).find(".fields_block").length == 0
             wrapper.html(data).css(opacity: "")
-            window.hancock_cms.feedback.recaptcha_render()
+            window.hancock_cms.feedback.recaptcha_render(form_selector)
           else
             wrapper.find(".fields_block").replaceWith($(data).find(".fields_block"))
             wrapper.css(opacity: "")
@@ -21,7 +21,7 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
         wrapper = $(form_selector).closest(wrapper_selector).stop().css(opacity: 0.01)
         if $(data).find(".recaptcha_error").length > 0 or $(data).find(".fields_block").length == 0
           wrapper.html(data).css(opacity: "")
-          window.hancock_cms.feedback.recaptcha_render()
+          window.hancock_cms.feedback.recaptcha_render(form_selector)
         else
           wrapper.find(".fields_block").replaceWith($(data).find(".fields_block"))
           wrapper.css(opacity: "")
@@ -33,7 +33,7 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = "#new_hancock_fe
       wrapper = $(form_selector).closest(wrapper_selector)
       if $(data).find(".recaptcha_error").length > 0 or $(data).find(".fields_block").length == 0
         wrapper.html(data)
-        window.hancock_cms.feedback.recaptcha_render()
+        window.hancock_cms.feedback.recaptcha_render(form_selector)
       else
         wrapper.find(".fields_block").replaceWith($(data).find(".fields_block"))
 
@@ -99,11 +99,21 @@ window.hancock_cms.feedback.set_feedback_form_reloader = (link_selector = "#hanc
 
 
 
-window.hancock_cms.feedback.recaptcha_autoclick = ->
-  $(".recaptcha-checkbox-checkmark").click()
+window.hancock_cms.feedback.recaptcha_autoclick = (form_selector = "#new_hancock_feedback_contact_message")->
+  $(form_selector).find(".recaptcha-checkbox-checkmark").click()
 
-window.hancock_cms.feedback.recaptcha_render = ->
-  window.grecaptcha.render($(".g-recaptcha")[0], {sitekey: $(".g-recaptcha").data('sitekey')})
+window.hancock_cms.feedback.recaptcha_render = (form_selector = "#new_hancock_feedback_contact_message")->
+  recaptcha = $(form_selector).find(".g-recaptcha")
+  params = {
+    sitekey:            recaptcha.data("sitekey"),
+    theme:              recaptcha.data("theme"),
+    type:               recaptcha.data("type"),
+    size:               recaptcha.data("size"),
+    tabindex:           recaptcha.data("tabindex"),
+    callback:           recaptcha.data("callback"),
+    'expired-callback': recaptcha.data("expired-callback")
+  }
+  window.grecaptcha.render(recaptcha[0], params)
 
 window.hancock_cms.feedback.recaptcha_reset = ->
   window.grecaptcha.reset()
