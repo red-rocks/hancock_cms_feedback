@@ -16,7 +16,7 @@ module Hancock::Feedback
           apply_simple_captcha message: Hancock::Feedback.configuration.captcha_error_message
         end
 
-        validates_email_format_of :email, unless: 'email.blank?'
+        validates_email_format_of :email, unless: -> (obj) { obj.email.blank? }
         if Hancock::Feedback.config.message_required
           validates_presence_of :content
         end
