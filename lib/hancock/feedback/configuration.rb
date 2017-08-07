@@ -26,6 +26,8 @@ module Hancock::Feedback
     attr_accessor :user_abilities_support
     attr_accessor :ra_comments_support
 
+    attr_accessor :personal_data_processing_as_hidden
+
     def initialize
       @recaptcha_support = !!defined?(Recaptcha)
       @simple_captcha_support = !!defined?(SimpleCaptcha)
@@ -46,6 +48,8 @@ module Hancock::Feedback
       @model_settings_support = !!defined?(RailsAdminModelSettings)
       @user_abilities_support = !!defined?(RailsAdminUserAbilities)
       @ra_comments_support = !!defined?(RailsAdminComments)
+
+      @personal_data_processing_as_hidden = false
     end
   end
 end

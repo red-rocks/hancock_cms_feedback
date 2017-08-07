@@ -29,7 +29,10 @@ ru:
         personal_data_processing:
           label: "Я даю разрешение на обработку моих персональных данных"
           placeholder: ""
-          update: ""
+
+        hidden_personal_data_processing:
+          label: "Нажимая на кнопку \"Отправить\", Вы соглашаетесь на обработку персональных данных"
+          placeholder: ""
 
 
   mongoid: &mongoid
