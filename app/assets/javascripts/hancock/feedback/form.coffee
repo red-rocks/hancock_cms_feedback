@@ -86,6 +86,7 @@ window.hancock_cms.feedback.set_feedback_form_reloader = (link_selector = "#hanc
             $(wrapper_selector).stop().css(opacity: 0.01).replaceWith(data).find('input[type=text]').focus()
         else
           $(wrapper_selector).stop().css(opacity: 0.01).replaceWith(data).find('input[type=text]').focus()
+        window.hancock_cms.feedback.recaptcha_render(wrapper_selector)
   else
     $(document).delegate link_selector, 'click', (e) ->
       e.preventDefault()
@@ -96,6 +97,7 @@ window.hancock_cms.feedback.set_feedback_form_reloader = (link_selector = "#hanc
             $(wrapper_selector).replaceWith(data).find('input[type=text]').focus()
         else
           $(wrapper_selector).replaceWith(data).find('input[type=text]').focus()
+        window.hancock_cms.feedback.recaptcha_render(wrapper_selector)
 
 
 
@@ -104,16 +106,17 @@ window.hancock_cms.feedback.recaptcha_autoclick = (form_selector = "#new_hancock
 
 window.hancock_cms.feedback.recaptcha_render = (form_selector = "#new_hancock_feedback_contact_message")->
   recaptcha = $(form_selector).find(".g-recaptcha")
-  params = {
-    sitekey:            recaptcha.data("sitekey"),
-    theme:              recaptcha.data("theme"),
-    type:               recaptcha.data("type"),
-    size:               recaptcha.data("size"),
-    tabindex:           recaptcha.data("tabindex"),
-    callback:           recaptcha.data("callback"),
-    'expired-callback': recaptcha.data("expired-callback")
-  }
-  window.grecaptcha.render(recaptcha[0], params)
+  if recaptcha.length > 0
+    params = {
+      sitekey:            recaptcha.data("sitekey"),
+      theme:              recaptcha.data("theme"),
+      type:               recaptcha.data("type"),
+      size:               recaptcha.data("size"),
+      tabindex:           recaptcha.data("tabindex"),
+      callback:           recaptcha.data("callback"),
+      'expired-callback': recaptcha.data("expired-callback")
+    }
+    window.grecaptcha and window.grecaptcha.render(recaptcha[0], params)
 
 window.hancock_cms.feedback.recaptcha_reset = ->
-  window.grecaptcha.reset()
+  window.grecaptcha and window.grecaptcha.reset()

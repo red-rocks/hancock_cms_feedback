@@ -11,7 +11,7 @@ ruby:
   _cache_helper = (Hancock::Feedback.config.cache_support ? :hancock_cache : :cache)
   autofocus_field ||= :name
   @contact_message ||= Hancock::Feedback::ContactMessage.new
-  
+
 / = simple_form_for @contact_message, url: hancock_feedback_contacts_path do |f|
 = simple_form_for @contact_message, url: hancock_feedback_contacts_path, html: {data: {remote: true }} do |f|
   .fields_block
@@ -20,16 +20,16 @@ ruby:
         = render partial: fields_partial, locals: {f: f, cache_key: "views/#{cache_key}", settings_scope: settings_scope, autofocus_field: autofocus_field}
     - else
       = render partial: fields_partial, locals: {f: f, settings_scope: settings_scope, autofocus_field: autofocus_field}
-    
-  - if Hancock::Feedback.config.captcha
+
+  - if settings_scope.captcha(default: Hancock::Feedback.config.captcha, kind: :boolean, label: "Использовать капчу?")
     - if Hancock::Feedback.config.recaptcha_support
       .input.recaptcha_field
         - if @recaptcha_error
-          span.error.recaptcha_error= @recaptcha_error          
+          span.error.recaptcha_error= @recaptcha_error
         = recaptcha_tags(recaptcha_options)
     - elsif Hancock::Feedback.config.simple_captcha_support
       = render partial: "hancock/feedback/contacts/simple_captcha", locals: {f: f, settings_scope: settings_scope}
-        
+
   - if Hancock::Feedback.config.model_settings_support
     - label = settings_scope.submit_label(default: t('hancock.send'), label: "Текст на кнопке отправки")
   - else

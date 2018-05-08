@@ -27,7 +27,7 @@ module Hancock::Feedback
         @contact_message = model.new(message_params)
         after_initialize
 
-        if Hancock::Feedback.config.captcha
+        if settings_scope.captcha(default: Hancock::Feedback.config.captcha, kind: :boolean, label: "Использовать капчу?")
           if Hancock::Feedback.config.recaptcha_support
             if verify_recaptcha
               meth = :save
