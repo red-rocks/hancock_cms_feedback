@@ -20,15 +20,17 @@ module Hancock::Feedback
         if Hancock::Feedback.config.message_required
           validates_presence_of :content
         end
-        validate do
+        def check_email_and_phone_blank
           if email.blank? && phone.blank?
             errors.add(:email, Hancock::Feedback.configuration.no_contact_info_error_message)
           end
         end
+        validate :check_email_and_phone_blank
 
-        after_create do
-          mailer_class.send(mailer_method, self).deliver_now if send_emails?
+        def deliver_now_if_send_emails
+          mailer_class.send(mailer_method, self).deliver_now if send_emails? and mailer_method
         end
+        after_create :deliver_now_if_send_emails
 
         def self.rails_admin_name_synonyms
           "Фидбек Фидбэк Обратная связь Контакты Сообщение Сообщения".freeze
