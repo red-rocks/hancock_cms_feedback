@@ -7,8 +7,11 @@ module Hancock::Feedback
       include Hancock::Feedback.orm_specific('ContactMessage')
 
       included do
+        # if Hancock::Feedback.config.model_settings_support
+        #   include RailsAdminModelSettings::ModelSettingable
+        # end
         if Hancock::Feedback.config.model_settings_support
-          include RailsAdminModelSettings::ModelSettingable
+          include Hancock::Settingable
         end
 
         if Hancock::Feedback.config.simple_captcha_support

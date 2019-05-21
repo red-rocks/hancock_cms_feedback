@@ -84,10 +84,8 @@ module Hancock::Feedback
       def settings_scope
         if Hancock::Feedback.config.model_settings_support
           model.settings
-        elsif defined?(Settings)
-          Settings.ns('feedback')
         else
-          nil
+          Settings.ns('feedback')
         end
       end
       def recaptcha_options

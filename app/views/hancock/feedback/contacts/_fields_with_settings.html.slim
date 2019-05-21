@@ -1,7 +1,7 @@
 ruby:
   cache_key ||= 'views/hancock_feedback_contacts_fields'.freeze
   if Hancock::Feedback.config.model_settings_support
-    settings_scope ||= Hancock::Feedback::ContactMessage.settings
+    settings_scope ||= @contact_message.class.settings
   elsif defined?(Settings)
     settings_scope ||= Settings.ns('feedback')
   end
