@@ -20,7 +20,6 @@ module Hancock::Feedback
     attr_accessor :breadcrumbs_on_rails_support
 
     attr_accessor :recaptcha_support
-    attr_accessor :simple_captcha_support
 
     attr_accessor :model_settings_support
     attr_accessor :user_abilities_support
@@ -30,9 +29,8 @@ module Hancock::Feedback
 
     def initialize
       @recaptcha_support = !!defined?(Recaptcha)
-      @simple_captcha_support = !!defined?(SimpleCaptcha)
 
-      @captcha = @recaptcha_support || @simple_captcha_support
+      @captcha = @recaptcha_support
       @message_required = true
 
       @seo_support    = !!defined? Hancock::Seo

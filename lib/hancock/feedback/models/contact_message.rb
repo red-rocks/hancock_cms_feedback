@@ -14,11 +14,6 @@ module Hancock::Feedback
           include Hancock::Settingable
         end
 
-        if Hancock::Feedback.config.simple_captcha_support
-          include SimpleCaptcha::ModelHelpers
-          apply_simple_captcha message: Hancock::Feedback.configuration.captcha_error_message
-        end
-
         validates_email_format_of :email, unless: -> (obj) { obj.email.blank? }
         if Hancock::Feedback.config.message_required
           validates_presence_of :content

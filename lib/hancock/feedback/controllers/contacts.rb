@@ -36,9 +36,6 @@ module Hancock::Feedback
               @recaptcha_error = I18n.t('hancock.errors.feedback.recaptcha')
             end
 
-          elsif Hancock::Feedback.config.simple_captcha_support
-            meth = :save_with_captcha
-
           else
             meth = :save
           end

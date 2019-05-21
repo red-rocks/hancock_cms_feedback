@@ -27,8 +27,6 @@ ruby:
         - if @recaptcha_error
           span.error.recaptcha_error= @recaptcha_error
         = recaptcha_tags(recaptcha_options)
-    - elsif Hancock::Feedback.config.simple_captcha_support
-      = render partial: "hancock/feedback/contacts/simple_captcha", locals: {f: f, settings_scope: settings_scope}
 
   - if Hancock::Feedback.config.model_settings_support
     - label = settings_scope.submit_label(default: t('hancock.send'), label: "Текст на кнопке отправки")

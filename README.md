@@ -17,10 +17,6 @@ Then add this
 ```ruby
 gem "recaptcha", require: "recaptcha/rails" # Recaptcha
 ```
-or this
-```ruby
-gem "glebtv-simple_captcha" # simple_captcha
-```
 before it for captcha you need. And configure it.
 
 And then execute:

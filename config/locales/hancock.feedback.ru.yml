@@ -55,6 +55,8 @@ ru:
               invalid_email_address: "^Неверный e-mail"
             personal_data_processing:
               checked_required: "Необходимо подтвердить"
+            content:
+              blank: "Укажите текст сообщения"
   activerecord:
     <<: *mongoid
 
