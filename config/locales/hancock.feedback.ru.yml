@@ -37,7 +37,7 @@ ru:
 
   mongoid: &mongoid
     models:
-      hancock/feedback/contact_message: Сообщение
+      hancock/feedback/contact_message: Сообщения
     attributes:
       hancock/feedback/contact_message:
         c_at: Время создания
