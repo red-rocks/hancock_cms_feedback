@@ -9,6 +9,7 @@ module Hancock::Feedback
         end
 
         Proc.new {
+          navigation_icon 'mdi mdi-email-open-outline'
           navigation_label(!nav_label.blank? ? nav_label : I18n.t('hancock.feedback'))
           
           field :c_at do
