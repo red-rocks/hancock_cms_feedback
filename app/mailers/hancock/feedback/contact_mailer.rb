@@ -1,7 +1,7 @@
 module Hancock::Feedback
   class ContactMailer < ActionMailer::Base
-    def new_message_email(message)
-      @message = message
+    def new_message_email(contact_message)
+      @message = contact_message
 
       #if message.attachment?
       #  attachments[message.attachment.identifier] = File.read(message.attachment.current_path)
@@ -9,7 +9,7 @@ module Hancock::Feedback
 
       # TODO unexepctional
       settings_scope = if Hancock::Feedback.config.model_settings_support
-        message.class.settings
+        contact_message.class.settings
       else
         Settings.ns('feedback')
       end
@@ -19,7 +19,7 @@ module Hancock::Feedback
           to: settings_scope.form_email(default: 'admin@redrocks.pro'),
           cc: settings_scope.form_email_cc(default: [], kind: :array),
           bcc: settings_scope.form_email_bcc(default: [], kind: :array),
-          subject: "[#{settings_scope.email_topic(default: 'с сайта')}] #{message.name} #{message.email}"
+          subject: "[#{settings_scope.email_topic(default: 'с сайта')}] #{contact_message.name} #{contact_message.email}"
       )
     end
   end
