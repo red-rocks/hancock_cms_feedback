@@ -16,17 +16,17 @@ window.hancock_cms.feedback.create_ajax_form = (form_selector = defaults.form_se
   $(document).on "ajax:send", form_selector, ()->
     $(form_selector).closest(wrapper_selector).addClass(classes['send'])
 
-  $(document).on "ajax:complete ajax:error", form_selector, (event, xhr, status, error)->
+  $(document).on "ajax:complete", form_selector, (event, xhr, status, error)->
     data = xhr.responseText
-    wrapper = $(form_selector).closest(wrapper_selector).removeClass(classes['sended'])
-    wrapper.addClass(classes['complete']).removeClass(classes['complete'])
+    wrapper = $(form_selector).closest(wrapper_selector).removeClass(classes['send'])
     is_fields_block = $(data).find(".fields_block").length > 0 and wrapper.find(".fields_block").length > 0
     if ($(data).find(".recaptcha_error").length > 0 or !is_fields_block) or true # TEMP
       wrapper.html(data)
       window.hancock_cms.feedback.recaptcha_render(form_selector)
     else
       wrapper.find(".fields_block").replaceWith($(data).find(".fields_block"))
-
+    wrapper.addClass(classes['complete']).removeClass(classes['complete'])
+    
   $(document).on 'click, focus', form_selector + " .input", (e) ->
     $(e.currentTarget).removeClass("field_with_errors").find('.error').hide()
 
@@ -46,7 +46,7 @@ window.hancock_cms.feedback.set_feedback_form_reloader = (link_selector = "#hanc
       else
         # $(wrapper_selector).html(data)
         $(wrapper_selector).replaceWith(data)
-      $(wrapper_selector).addClass(classes['reloaded']).removeClass(classes['reloaded'])
+      $(wrapper_selector).addClass(classes['reload']).removeClass(classes['reload'])
       window.hancock_cms.feedback.recaptcha_render(wrapper_selector)
 
 

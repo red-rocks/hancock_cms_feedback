@@ -98,6 +98,7 @@ module Hancock::Feedback
         {
           is_cache_fields:    is_cache_fields,
           cache_key:          cache_key,
+          form_partial:       form_partial,
           fields_partial:     fields_partial,
           settings_scope:     settings_scope,
           recaptcha_options:  recaptcha_options
